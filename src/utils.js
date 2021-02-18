@@ -79,13 +79,13 @@ export function toBool (filters) {
 
   const cleaned = {}
 
-  if (unwrapped.must) {
+  if (unwrapped.must && unwrapped.must.length) {
     cleaned.must = unwrapped.must
   }
-  if (unwrapped.should) {
+  if (unwrapped.should && unwrapped.should.length) {
     cleaned.should = filters.or
   }
-  if (unwrapped.must_not) {
+  if (unwrapped.must_not && unwrapped.must_not.length) {
     cleaned.must_not = filters.not
   }
   if (
@@ -101,7 +101,7 @@ export function toBool (filters) {
 }
 
 function unwrap (arr) {
-  return arr.length > 1 ? arr : _.last(arr)
+  return arr;
 }
 
 export function pushQuery (existing, boolKey, type, ...args) {
